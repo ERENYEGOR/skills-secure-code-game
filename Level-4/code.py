@@ -2,7 +2,16 @@ import sqlite3
 import os
 from flask import Flask, request
 
-### Unrelated to the exercise -- Starts here -- Please ignore
+con = sqlite3.connect('users.db')
+user_input = "Mary'); DROP TABLE Users;--"
+sql_stmt = "INSERT INTO Users (user) VALUES ('" + user_input + "');"
+con.executescript(sql_stmt)
+
+con = sqlite3.connect('users.db')
+user_input = "Mary'); DROP TABLE Users;--"
+
+con.execute("INSERT INTO Users (user) VALUES (?)", (user_input,))
+
 app = Flask(__name__)
 @app.route("/")
 def source():
